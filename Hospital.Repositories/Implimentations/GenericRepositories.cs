@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Implimentations
 {
-    public class GenericRepository<T> : IDisposable, IGenericRepositories<T> where T : class
+    public class GenericRepositories<T> : IDisposable, IGenericRepositories<T> where T : class
     {
 
         private readonly ApplicationDBContext _context;
         internal DbSet<T> dbSet;
 
-        public GenericRepository(ApplicationDBContext context)
+        public GenericRepositories(ApplicationDBContext context)
         {
             _context = context;
             this.dbSet = context.Set<T>();
@@ -80,7 +80,7 @@ namespace Hospital.Repositories.Implimentations
             {
                 query = query.Where(filter);
             }
-            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperties);
             }
